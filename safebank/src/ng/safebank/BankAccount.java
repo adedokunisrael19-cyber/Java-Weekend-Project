@@ -90,4 +90,26 @@ public class BankAccount {
     public BigDecimal getBalance() {
         return balance;
     }
+
+
+
+    public  void displayTransactionHistory() {
+        if(transactionHistory.isEmpty()){
+            System.out.println("There are no transactions in this account.");
+            return;
+        }
+
+        System.out.println("\n========== TRANSACTION HISTORY ==========");
+
+        for(Transaction transaction : transactionHistory){
+            System.out.println("Type" +  transaction.getType() );
+            System.out.println( " Amount : #" + transaction.getAmount());
+            System.out.println("Date" + transaction.getTimestamp());
+
+            System.out.println("Balance after Transaction: #" + transaction.getAmount());
+
+            System.out.println("______________________________________________________");
+        }
+
+    }
 }
