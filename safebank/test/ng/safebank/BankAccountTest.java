@@ -5,6 +5,7 @@ import exception.WithdrawalLimitExceededException;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -286,6 +287,24 @@ class BankAccountTest {
                 new BigDecimal("55000"),
                 history.get(2).getBalanceAfterTransaction()
         );
+    }
+
+    @Test
+    void shouldGenerateTimestampAtTransactionCreation() {
+
+        LocalDateTime beforeCreation = LocalDateTime.now();
+
+        Transaction transaction = new Transaction(
+                TransactionType.DEPOSIT,
+                new BigDecimal("5000"),
+                new BigDecimal("15000")
+        );
+
+        LocalDateTime afterCreation = LocalDateTime.now();
+
+        assertFalse(transaction.getTimestamp().isBefore(beforeCreation));
+
+        assertFalse(transaction.getTimestamp().isAfter(afterCreation));
     }
 
 }
